@@ -2,8 +2,7 @@
 
 > Criando um servidor com HTTP
 
-~~~ javascript
-
+```javascript
 const http = require('http')
 
 http.createServer((request, response)=>{
@@ -13,13 +12,19 @@ http.createServer((request, response)=>{
     response.write('CFB Cursos \n')
     response.end()
 }).listen(1337)
+```
 
-~~~
+> Iniciar servidor
+
+```sh
+node app.js
+http://localhost:1337/
+```
+
 
 > Criando Rotas no Servidor NodeJS
 
-~~~ javascript
-
+```javascript
 const http = require('http')
 const port = 3000
 const host = '127.0.0.1'
@@ -39,11 +44,9 @@ const servidor = http.createServer((req, res)=>{
 })
 
 servidor.listen(port, host, ()=>{console.log('Servidor rodando...')})
+```
 
-~~~
-
-~~~ javascript
-
+```javascript
 const http = require('http')
 const url = require('url')
 const port = 3000
@@ -59,5 +62,34 @@ const servidor = http.createServer((req, res)=>{
 })
 
 servidor.listen(port, host, ()=>{console.log('Servidor rodando...')})
+```
 
-~~~
+## Instalação Express
+
+```sh
+mkdir projeto
+touch app.js
+npm install express --save
+```
+
+
+> Criando Rotas usando Express
+
+```javascript
+const express = require('express')
+const app = express()
+const porta = process.env.PORT
+
+app.get('/', (req, res) => {
+    res.send('CFB Cursos')
+})
+app.get('/canal', (req, res) => {
+    res.json({canal: 'CFB Cursso'})
+})
+
+
+app.listen(porta || 3000, () => {'Servidor rondando...'})
+```
+
+
+
