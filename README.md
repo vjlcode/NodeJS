@@ -190,4 +190,65 @@ app.listen(porta, () => { console.log('Rodando') })
 
 ```
 
+```sh
 
+mkdir projeto
+touch index.js
+touch db.js
+$ npm install mysql2 --save
+
+```
+
+> Conexao com banco MysSQL
+
+```javascript
+
+const conectar = async () => {
+  if (global.conexao && global.conexao.state != "disconnected") {
+    return global.conexao;
+  }
+  const mysql = require("mysql2/promise");
+  const conn = mysql.createConnection(
+    "mysql://root:admin@localhost:3306/cfbcursos"
+  );
+  console.log("Conectou ao banco");
+  global.conexao = conn;
+  return conn;
+};
+
+const todosClientes = async () => {
+  const conn = await conectar();
+  const [linhas] = await conn.query("SELECT * FROM cliente_node");
+  return await linhas;
+};
+
+module.exports = { todosClientes };
+
+```
+
+> Chamando aplicação _db.js_
+
+```javascript
+
+const conectar = async () => {
+  if (global.conexao && global.conexao.state != "disconnected") {
+    return global.conexao;
+  }
+  const mysql = require("mysql2/promise");
+  const conn = mysql.createConnection(
+    "mysql://root:admin@localhost:3306/cfbcursos"
+  );
+  console.log("Conectou ao banco");
+  global.conexao = conn;
+  return conn;
+};
+
+const todosClientes = async () => {
+  const conn = await conectar();
+  const [linhas] = await conn.query("SELECT * FROM cliente_node");
+  return await linhas;
+};
+
+module.exports = { todosClientes };
+
+```
